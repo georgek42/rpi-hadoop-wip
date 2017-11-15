@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: hadoop-slave4
+  name: hadoop-slave4
+spec:
+  ports:
+    - name: hadoop
+      port: 50070
+      targetPort: 50070
+    - name: hadoop2
+      port: 8088
+      targetPort: 8088
+    - name: hdfs
+      port: 9000
+      targetPort: 9000
+    - name: ssh
+      port: 22
+      targetPort: 22
+  selector:
+    name: hadoop-slave4
+  type: ClusterIP

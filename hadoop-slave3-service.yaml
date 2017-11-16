@@ -7,17 +7,44 @@ metadata:
 spec:
   ports:
     - name: hadoop
-      port: 50070
-      targetPort: 50070
+      containerPort: 50070
+      hostPort: 50070
+    - name: hadoop3000
+      containerPort: 3000
+      hostPort: 3000
+    - name: hadoop3001
+      containerPort: 3001
+      hostPort: 3001
+    - name: hadoop3002
+      containerPort: 3002
+      hostPort: 3002
+    - name: hadoop3003
+      containerPort: 3003
+      hostPort: 3003
+    - name: hadoop3004
+      containerPort: 3004
+      hostPort: 3004
+    - name: hadoop3005
+      containerPort: 3005
+      hostPort: 3005
+    - name: hadoop3006
+      containerPort: 3006
+      hostPort: 3006
+    - name: hadoop3007
+      containerPort: 3007
+      hostPort: 3007
+    - name: hadoop3008
+      containerPort: 3008
+      hostPort: 3008
     - name: hadoop2
-      port: 8088
-      targetPort: 8088
+      containerPort: 8088
+      hostPort: 8088
     - name: hdfs
-      port: 9000
-      targetPort: 9000
+      containerPort: 9000
+      hostPort: 9000
     - name: ssh
-      port: 22
-      targetPort: 22
+      containerPort: 22
+      hostPort: 22
   selector:
     name: hadoop-slave3
   type: ClusterIP

@@ -51,6 +51,24 @@ spec:
           - name: hadoop2
             containerPort: 8088
             hostPort: 8088
+          - name: hadoop3
+            containerPort: 8040
+            hostPort: 8040
+          - name: hadoop4
+            containerPort: 8042
+            hostPort: 8042
+          - name: hadoop5
+            containerPort: 13562
+            hostPort: 13562
+          - name: datanode
+            containerPort: 50010
+            hostPort: 50010
+          - name: datanode2
+            containerPort: 50020
+            hostPort: 50020
+          - name: datanode3
+            containerPort: 50075
+            hostPort: 50075
           - name: hdfs
             containerPort: 9000
             hostPort: 9000

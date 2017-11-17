@@ -6,22 +6,38 @@ metadata:
   name: hadoop-slave
 spec:
   ports:
-    - port: 22
-    - port: 3000
-    - port: 3001
-    - port: 3002
-    - port: 3003
-    - port: 3004
-    - port: 3005
-    - port: 3006
-    - port: 3007
-    - port: 3008
-    - port: 8040
-    - port: 8042
-    - port: 13562
-    - port: 50010
-    - port: 50020
-    - port: 50075
+    - name: ssh
+      port: 22
+    - name: hadoop3000
+      port: 3000
+    - name: hadoop3001
+      port: 3001
+    - name: hadoop3002
+      port: 3002
+    - name: hadoop3003
+      port: 3003
+    - name: hadoop3004
+      port: 3004
+    - name: hadoop3005
+      port: 3005
+    - name: hadoop3006
+      port: 3006
+    - name: hadoop3007
+      port: 3007
+    - name: hadoop3008
+      port: 3008
+    - name: node-manager
+      port: 8040
+    - name: node-manager-webapp
+      port: 8042
+    - name: mapreduce-shuffle
+      port: 13562
+    - name: datanode
+      port: 50010
+    - name: datanode-ipc
+      port: 50020
+    - name: datanode-http
+      port: 50075
   selector:
     name: hadoop-slave
   type: ClusterIP

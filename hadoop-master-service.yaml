@@ -6,24 +6,51 @@ metadata:
   name: hadoop-master
 spec:
   ports:
-    - port: 22
-    - port: 3000
-    - port: 3001
-    - port: 3002
-    - port: 3003
-    - port: 3004
-    - port: 3005
-    - port: 3006
-    - port: 3007
-    - port: 3008
-    - port: 8030
-    - port: 8031
-    - port: 8032
-    - port: 8033
-    - port: 8088
-    - port: 9000
-    - port: 50070
-    - port: 50090
+    - name: hadoop
+      port: 50070
+      targetPort: 50070
+    - name: hadoop3000
+      port: 3000
+      targetPort: 3000
+    - name: hadoop3001
+      port: 3001
+      targetPort: 3001
+    - name: hadoop3002
+      port: 3002
+      targetPort: 3002
+    - name: hadoop3003
+      port: 3003
+      targetPort: 3003
+    - name: hadoop3004
+      port: 3004
+      targetPort: 3004
+    - name: hadoop3005
+      port: 3005
+      targetPort: 3005
+    - name: hadoop3006
+      port: 3006
+      targetPort: 3006
+    - name: hadoop3007
+      port: 3007
+      targetPort: 3007
+    - name: hadoop3008
+      port: 3008
+      targetPort: 3008
+    - name: hadoop2
+      port: 8088
+      targetPort: 8088
+    - name: hadoop3
+      port: 8031
+      targetPort: 8031
+    - name: hadoop4
+      port: 8032
+      targetPort: 8032
+    - name: hdfs
+      port: 9000
+      targetPort: 9000
+    - name: ssh
+      port: 22
+      targetPort: 22
   selector:
     name: hadoop-master
   type: ClusterIP

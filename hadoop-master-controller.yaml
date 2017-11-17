@@ -18,24 +18,51 @@ spec:
         stdin: true
         tty: true
         ports:
-          - containerPort: 22
-          - containerPort: 3000
-          - containerPort: 3001
-          - containerPort: 3002
-          - containerPort: 3003
-          - containerPort: 3004
-          - containerPort: 3005
-          - containerPort: 3006
-          - containerPort: 3007
-          - containerPort: 3008
-          - containerPort: 8030
-          - containerPort: 8031
-          - containerPort: 8032
-          - containerPort: 8033
-          - containerPort: 8088
-          - containerPort: 9000
-          - containerPort: 50070
-          - containerPort: 50090
+          - name: hadoop
+            containerPort: 50070
+            hostPort: 50070
+          - name: hadoop3000
+            containerPort: 3000
+            hostPort: 3000
+          - name: hadoop3001
+            containerPort: 3001
+            hostPort: 3001
+          - name: hadoop3002
+            containerPort: 3002
+            hostPort: 3002
+          - name: hadoop3003
+            containerPort: 3003
+            hostPort: 3003
+          - name: hadoop3004
+            containerPort: 3004
+            hostPort: 3004
+          - name: hadoop3005
+            containerPort: 3005
+            hostPort: 3005
+          - name: hadoop3006
+            containerPort: 3006
+            hostPort: 3006
+          - name: hadoop3007
+            containerPort: 3007
+            hostPort: 3007
+          - name: hadoop3008
+            containerPort: 3008
+            hostPort: 3008
+          - name: hadoop2
+            containerPort: 8088
+            hostPort: 8088
+          - name: hadoop3
+            containerPort: 8031
+            hostPort: 8031
+          - name: hadoop4
+            containerPort: 8032
+            hostPort: 8032
+          - name: hdfs
+            containerPort: 9000
+            hostPort: 9000
+          - name: ssh
+            containerPort: 22
+            hostPort: 22
         env:
           - name: IMAMASTER
             value: "true"

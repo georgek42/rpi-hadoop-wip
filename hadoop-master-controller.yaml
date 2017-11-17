@@ -57,6 +57,15 @@ spec:
           - name: hadoop4
             containerPort: 8032
             hostPort: 8032
+          - name: hadoop5
+            containerPort: 8033
+            hostPort: 8033
+          - name: hadoop6
+            containerPort: 8030
+            hostPort: 8030
+          - name: hadoop7
+            containerPort: 50090
+            hostPort: 50090
           - name: hdfs
             containerPort: 9000
             hostPort: 9000

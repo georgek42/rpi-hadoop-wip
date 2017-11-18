@@ -20,6 +20,8 @@ For this project we utilized the Raspberry Pi 3 (RPi3) which runs on a 64 bit AR
 The cluster made for this project consists of 8 RPi3’s. Each of which follows the specifications defined above.  We 3D printed two racks where each rack holds four RPi3’s.  The racks are designed in such a way that there are four RPi3’s stacked on top of each other with enough clearance for each RPi3 to not touch the one above or below it.  Each RPi3 has one heat sink on the CPU to enable better airflow to cool down the RPi3’s due to their close positioning on the rack. Their close positioning allows for us to be able to connect all the RPi3’s to a power source, which consists of two USB hubs with eight USB ports at a total of 60W or 12A for each hub.  To connect each RPi3 via ethernet connection, we are utilizing a 10/100 Mbps connection router. We chose not to go with a wireless connection due to the lack of reliability from experiences with Arduinos in previous classes.
 * * *
 
+
+
 ## Deploying Map/Reduce
 In order to deploy our Map/Reduce (M/R) program onto the Octa-Pie cluster, there are a couple of steps we had to take involving various services. Firstly, after we had the Octa-Pie Cluster physically set up on the racks and connected via ethernet, we had to load an operating system onto the cluster. For each RPi3 we installed Hypriot OS and on top of Hypriot we installed Kubernetes as a container manager. Additionally, assigned each container an IP address using Flannel. Thus, the assigned Kubernetes master node will thereafter communicate with the other nodes within the cluster in order to successfully run our M/R implementation with other nodes once we upload it. Lastly, Hadoop also had to be installed on our cluster in order for the cluster to successfully run our M/R implementation.
 
@@ -50,6 +52,7 @@ $ kubectl get nodes
 ```
 
 At this point all the nodes should have joined the cluster. The output should look something like this
+
 | Name          | Status        | Roles  |
 | ------------- |:-------------:|:------:|
 | master        | Ready         | master |
@@ -59,12 +62,13 @@ At this point all the nodes should have joined the cluster. The output should lo
 | slave4        | Ready         | <none> |
 | slave5        | Ready         | <none> |
 | slave6        | Ready         | <none> |
+
 If the nodes aren't all ready yet, don't panic. It takes a few minutes for their pods to come online.
 You can check pod status with `kubectl get pods --all-namespaces`
 
 ```sh
 # Now we'll start the hadoop services on the master
-$ git clone
+$ git clone https://github.com/georgek42/rpi-hadoop-wip.git
 $ cd rpi-hadoop-wip
 $ for file in $( ls | grep service ); do kubectl create -f $file; done
 $ for file in $( ls | grep controller ); do kubectl create -f $file; done
@@ -78,6 +82,7 @@ $ kubectl get pods
 | hadoop-slave2-controller-XXXXX  | 1/1   | Running |
 | hadoop-slave3-controller-XXXXX  | 1/1   | Running |
 | hadoop-slave4-controller-XXXXX  | 1/1   | Running |
+
 Now we can run a map reduce job!
 
 ### Running a Map Reduce Job

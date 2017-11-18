@@ -93,15 +93,15 @@ Now we are ready for the next step.
 $ kubectl exec -it $(kubectl get po | grep master | awk '{ print $1 }') -- /bin/bash
 
 # Add slave ips to /etc/hosts
-root@hadoop-master:~# for slave in $( cat $HADOOP_HOME/etc/hadoop/slaves ); do echo "$(nslookup $slave | grep -m2 Address | tail -n1 | awk '{ print $2 }') $slave" >> /etc/hosts; done;
+root@hadoop-master:~$ for slave in $( cat $HADOOP_HOME/etc/hadoop/slaves ); do echo "$(nslookup $slave | grep -m2 Address | tail -n1 | awk '{ print $2 }') $slave" >> /etc/hosts; done;
 
 # restart sshd and start hadoop
-root@hadoop-master:~# service ssh restart
-root@hadoop-master:~# ./start-hadoop.sh
+root@hadoop-master:~$ service ssh restart
+root@hadoop-master:~$ ./start-hadoop.sh
 # Run map reduce job
-root@hadoop-master:~# hadoop jar $PATH_TO_JAR $ARGS
+root@hadoop-master:~$ hadoop jar $PATH_TO_JAR $ARGS
 # success!
-root@hadoop-master:~# hdfs dfs -cat output/part-00000
+root@hadoop-master:~$ hdfs dfs -cat output/part-00000
 ```
 
 **Hadoop Set-Up Script**

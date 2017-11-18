@@ -40,7 +40,9 @@ $ echo "export KUBECONFIG=${HOME}/.kube/config" >> ~/.bashrc
 $ source ~/.bashrc
 # Add flannel related resources to cluster
 $ curl -sSL https://raw.githubusercontent.com/coreos/flannel/v0.9.0/Documentation/kube-flannel.yml | sed "s/amd64/arm64/g" | kubectl create -f -
-# On all nodes flannel related traffic will need to be forwarded, it is recommended to use something like netfilter-persistent to save the rules between sessions.
+# On all nodes flannel related traffic will need to be forwarded, it
+# is recommended to use something like netfilter-persistent to save
+# the rules between sessions.
 $ sudo iptables -P FORWARD ACCEPT
 $ sudo iptables -t nat -A POSTROUTING -s 10.244.0.0/16 ! -d 10.244.0.0/16 -j MASQUERADE
 $ sudo iptables -I FORWARD 1 -i cni0 -j ACCEPT -m comment --comment "flannel subnet"

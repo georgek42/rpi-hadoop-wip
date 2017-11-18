@@ -55,15 +55,15 @@ $ kubectl get nodes
 
 At this point all the nodes should have joined the cluster. The output should look something like this
 
-| Name          | Status        | Roles  |
-| ------------- |:-------------:|:------:|
-| master        | Ready         | master |
-| slave1        | Ready         | <none> |
-| slave2        | Ready         | <none> |
-| slave3        | Ready         | <none> |
-| slave4        | Ready         | <none> |
-| slave5        | Ready         | <none> |
-| slave6        | Ready         | <none> |
+| Name          | Status        | Roles   |
+| ------------- |:-------------:|:-------:|
+| master        | Ready         | master  |
+| slave1        | Ready         | \<none> |
+| slave2        | Ready         | \<none> |
+| slave3        | Ready         | \<none> |
+| slave4        | Ready         | \<none> |
+| slave5        | Ready         | \<none> |
+| slave6        | Ready         | \<none> |
 
 If the nodes aren't all ready yet, don't panic. It takes a few minutes for their pods to come online.
 You can check pod status with `kubectl get pods --all-namespaces`
@@ -85,7 +85,7 @@ $ kubectl get pods
 | hadoop-slave3-controller-XXXXX  | 1/1   | Running |
 | hadoop-slave4-controller-XXXXX  | 1/1   | Running |
 
-Now we can run a map reduce job!
+Now we are ready for the next step.
 
 ### Running a Map Reduce Job
 ```sh

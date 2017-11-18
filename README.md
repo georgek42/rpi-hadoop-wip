@@ -9,7 +9,7 @@ Edmond Zalenski, George Karchenko, George Poulos, Jeff Kaleshi, Kevin Liu , Kuna
 | Hypriot       | v1.6          |
 | Kubernetes    | v1.8.3        |
 | Flannel       | v0.9          |
-| Hadoop        | v2.??         |
+| Hadoop        | v2.8.2        |
 * * *
 
 ## Individual Raspberry Pi

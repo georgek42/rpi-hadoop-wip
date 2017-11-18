@@ -23,32 +23,79 @@ The cluster made for this project consists of 8 RPi3’s. Each of which follows 
 ## Deploying Map/Reduce
 In order to deploy our Map/Reduce (M/R) program onto the Octa-Pie cluster, there are a couple of steps we had to take involving various services. Firstly, after we had the Octa-Pie Cluster physically set up on the racks and connected via ethernet, we had to load an operating system onto the cluster. For each RPi3 we installed Hypriot OS and on top of Hypriot we installed Kubernetes as a container manager. Additionally, assigned each container an IP address using Flannel. Thus, the assigned Kubernetes master node will thereafter communicate with the other nodes within the cluster in order to successfully run our M/R implementation with other nodes once we upload it. Lastly, Hadoop also had to be installed on our cluster in order for the cluster to successfully run our M/R implementation.
 
-Descriptions of steps taken and commands required are provided below.  
+Descriptions of steps taken and commands required are provided below.
 
 ### Commands to Init Cluster
-Edmond to do
+[Source for initializing cluster](http://www.ecliptik.com/Raspberry-Pi-Kubernetes-Cluster/)
+```sh
+# Initialize cluster on master, save the args for the kubeadm join command outputted
+$ sudo kubeadm init --pod-network-cidr 10.244.0.0/16 # cidr is for flannel
+# Save kubernetes config file
+$ mkdir -p $HOME/.kube
+$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+$ echo "export KUBECONFIG=${HOME}/.kube/config" >> ~/.bashrc
+$ source ~/.bashrc
+# Add flannel related resources to cluster
+$ curl -sSL https://raw.githubusercontent.com/coreos/flannel/v0.9.0/Documentation/kube-flannel.yml | sed "s/amd64/arm64/g" | kubectl create -f -
+# On all nodes flannel related traffic will need to be forwarded, it is recommended to use something like netfilter-persistent to save the rules between sessions.
+$ sudo iptables -P FORWARD ACCEPT
+$ sudo iptables -t nat -A POSTROUTING -s 10.244.0.0/16 ! -d 10.244.0.0/16 -j MASQUERADE
+$ sudo iptables -I FORWARD 1 -i cni0 -j ACCEPT -m comment --comment "flannel subnet"
+$ sudo iptables -I FORWARD 1 -o cni0 -j ACCEPT -m comment --comment "flannel subnet"
+# Now on each of the other nodes run the kubeadm command saved earlier
+$ sudo kubeadm join $ARGS
+# Check to see them back on master node
+$ kubectl get nodes
+```
 
-### Commands to Run Hadoop
-Ensure Hadoop Master Pod is Up  
-`kubectl get po`
+At this point all the nodes should have joined the cluster. The output should look something like this
+| Name          | Status        | Roles  |
+| ------------- |:-------------:|:------:|
+| master        | Ready         | master |
+| slave1        | Ready         | <none> |
+| slave2        | Ready         | <none> |
+| slave3        | Ready         | <none> |
+| slave4        | Ready         | <none> |
+| slave5        | Ready         | <none> |
+| slave6        | Ready         | <none> |
+If the nodes aren't all ready yet, don't panic. It takes a few minutes for their pods to come online.
+You can check pod status with `kubectl get pods --all-namespaces`
 
-Enter Master Pod  
-`kubectl exec -it $(kubectl get po | grep master | awk '{ print $1 \
-}') -- /bin/bash`
+```sh
+# Now we'll start the hadoop services on the master
+$ git clone
+$ cd rpi-hadoop-wip
+$ for file in $( ls | grep service ); do kubectl create -f $file; done
+$ for file in $( ls | grep controller ); do kubectl create -f $file; done
+# Wait until all the pods are up
+$ kubectl get pods
+```
+| Name                            | Ready | Status  |
+| ------------------------------- |:-----:|:-------:|
+| hadoop-master-controller-XXXXX  | 1/1   | Running |
+| hadoop-slave1-controller-XXXXX  | 1/1   | Running |
+| hadoop-slave2-controller-XXXXX  | 1/1   | Running |
+| hadoop-slave3-controller-XXXXX  | 1/1   | Running |
+| hadoop-slave4-controller-XXXXX  | 1/1   | Running |
+Now we can run a map reduce job!
 
-Add Slaves To Host  
-`root@hadoop-master:~# for slave in $( cat \
-$HADOOP_HOME/etc/hadoop/slaves ); do echo "$(nslookup $slave | grep \
--m2 Address | tail -n1 | awk '{ print $2 }') $slave" >> \
-/etc/hosts; done;`
+### Running a Map Reduce Job
+```sh
+# Enter the master pod
+$ kubectl exec -it $(kubectl get po | grep master | awk '{ print $1 }') -- /bin/bash
 
-Restart SSHD and Start Hadoop  
-`root@hadoop-master:~# service ssh restart  
-root@hadoop-master:~# ./start-hadoop.sh  
-root@hadoop-master:~# hadoop jar $PATH_TO_JAR $ARGS `
+# Add slave ips to /etc/hosts
+root@hadoop-master:~# for slave in $( cat $HADOOP_HOME/etc/hadoop/slaves ); do echo "$(nslookup $slave | grep -m2 Address | tail -n1 | awk '{ print $2 }') $slave" >> /etc/hosts; done;
 
-Success  
-`root@hadoop-master:~# hdfs dfs -cat output/part-00000`
+# restart sshd and start hadoop
+root@hadoop-master:~# service ssh restart
+root@hadoop-master:~# ./start-hadoop.sh
+# Run map reduce job
+root@hadoop-master:~# hadoop jar $PATH_TO_JAR $ARGS
+# success!
+root@hadoop-master:~# hdfs dfs -cat output/part-00000
+```
 
 **Hadoop Set-Up Script**
 ![](https://imgur.com/ArA2MDN.png)

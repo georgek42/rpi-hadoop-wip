@@ -112,7 +112,7 @@ root@hadoop-master:~$ hdfs dfs -cat output/part-00000
 ![](https://imgur.com/9f15R3q.png)
 
 **Video Demo**
-![](https://www.youtube.com/watch?v=DbCuWlGu6oE&feature=youtu.be)
+[The Video to our project Demo](https://www.youtube.com/watch?v=DbCuWlGu6oE&feature=youtu.be)
 
 * * *
 

@@ -129,10 +129,10 @@ Lastly, when we initially set up our cluster, we had the IPs being assigned to o
 * * *
 
 ## Team Members
-Edmond Zalenski![alt text](https://i.imgur.com/s5MeYOX.png 'Edmond Zalenski')
-George Kharchenko![alt text](https://i.imgur.com/WBljN2W.png 'George Kharchenko')
-George Poulos![alt text](https://i.imgur.com/vJaKvek.png 'George Poulos')
-Jeff Kaleshi![alt text](https://imgur.com/kC9YR9l.png 'Jeff Kaleshi')
-Kevin Liu![alt text](https://imgur.com/Y0XF2Zd.png 'Kevin Liu')
-Kunal Shah![alt text](https://imgur.com/93jdJll.png 'Kunal Shah')
-Tim Choh![alt text](https://imgur.com/EHiIEM4.png 'Tim Choh')
+Edmond Zalenski ![alt text](https://i.imgur.com/s5MeYOX.png 'Edmond Zalenski')
+George Kharchenko ![alt text](https://i.imgur.com/WBljN2W.png 'George Kharchenko')
+George Poulos ![alt text](https://i.imgur.com/vJaKvek.png 'George Poulos')
+Jeff Kaleshi ![alt text](https://imgur.com/kC9YR9l.png 'Jeff Kaleshi')
+Kevin Liu ![alt text](https://imgur.com/Y0XF2Zd.png 'Kevin Liu')
+Kunal Shah ![alt text](https://imgur.com/93jdJll.png 'Kunal Shah')
+Tim Choh ![alt text](https://imgur.com/EHiIEM4.png 'Tim Choh')

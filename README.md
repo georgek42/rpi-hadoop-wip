@@ -108,7 +108,7 @@ root@hadoop-master:~$ hdfs dfs -cat output/part-00000
 ![](https://imgur.com/ArA2MDN.png)
 
 **Map Reduce Successfully Running**
-![](https://imgur.com/3YyhNKo.png)
+![](https://imgur.com/Qk7nUa2.png)
 ![](https://imgur.com/9f15R3q.png)
 
 **Video Demo**
